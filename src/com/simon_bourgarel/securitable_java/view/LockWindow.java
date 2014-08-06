@@ -21,14 +21,15 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -49,7 +50,6 @@ public class LockWindow extends JFrame{
 	JButton jButton_OK;
 	JButton jButtonHelp;
 	
-	MyTableModel myTableModel;
 	JTable jTable;
 	JTextField jTextFieldPassword;
 	JCheckBox jCheckBox = new JCheckBox("New Coordinates");
@@ -60,19 +60,13 @@ public class LockWindow extends JFrame{
 		password = manager.recover();
 		
 		this.setTitle("SecuriTable");
-		this.setSize(250, 365);
+		this.setSize(250, 540);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		
-		passwordGenerated = "";
-		
-		myTableModel = new MyTableModel(tab);
 		passwordGenerated = manager.generate(tab, password); // Generation of the password,
 		//depending on the table and the coordinates (stored in the class "Password").
-		jTable = new JTable(myTableModel);
-		jTable.setDefaultRenderer(Object.class, new MyRenderer());
-		jTable.setEnabled(false);
 		
 		JLabel label = new JLabel("Password :");
 		
@@ -97,16 +91,19 @@ public class LockWindow extends JFrame{
 		panelNew_Help.setLayout(new GridLayout(1,2));
 		panelNew_Help.add(jCheckBox);
 		panelNew_Help.add(jButtonHelp);
-		
-		
+
 		JPanel lastPanel = new JPanel();
 		lastPanel.setLayout(new GridLayout(3,1));
 		lastPanel.add(jPanelPassword);
 		lastPanel.add(jButton_OK);
-		lastPanel.add(panelNew_Help);
+		lastPanel.add(panelNew_Help);		
 
-		
-		panel.add(new JScrollPane(jTable));
+		// Draw the table (an image) into the screen
+		try {
+			panel.add(new JLabel(new ImageIcon(manager.createImage(tab))));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		panel.add(lastPanel);
 		
 		this.setContentPane(panel);

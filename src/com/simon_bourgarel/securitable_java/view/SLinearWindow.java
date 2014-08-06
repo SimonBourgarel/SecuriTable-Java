@@ -17,19 +17,18 @@
 
 package com.simon_bourgarel.securitable_java.view;
 
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
 import com.simon_bourgarel.securitable_java.controller.Manager;
 import com.simon_bourgarel.securitable_java.model.Password;
@@ -42,7 +41,6 @@ public class SLinearWindow extends JFrame{
 	
 	int[][] tab;
 	JPanel mainPanel;
-	JTable jTable;
 	Manager manager;
 	
 	JButton jButtonSubmit;
@@ -59,14 +57,13 @@ public class SLinearWindow extends JFrame{
 	public SLinearWindow(){
 		
 		this.setTitle("SecuriTable");
-		this.setSize(new Dimension(200,400));
+		this.setSize(250, 540);
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		
 		Manager manager = new Manager();
 		tab = manager.tableGeneration();
-		MyTableModel tableModel = new MyTableModel(tab);
 		
 		jcomboBoxFA = new JComboBox();
 		jcomboBoxFO = new JComboBox();
@@ -87,11 +84,7 @@ public class SLinearWindow extends JFrame{
 		jcomboBoxFO.addActionListener(new BoxListener());
 		jcomboBoxLA.addActionListener(new BoxListener());		
 		jcomboBoxLO.addActionListener(new BoxListener());
-		
-		jTable = new JTable(tableModel);
-		jTable.setDefaultRenderer(Object.class, new MyRenderer());
-		jTable.setEnabled(false);
-		
+				
 		jButtonRules = new JButton("Rules");
 		jButtonRules.addActionListener(new ButtonRulesListener());
 		
@@ -131,7 +124,14 @@ public class SLinearWindow extends JFrame{
 		
 		mainPanel = new JPanel();
 		mainPanel.setLayout(mainLayout);
-		mainPanel.add(new JScrollPane(jTable));
+		
+		// Draw the table (an image) into the screen
+		try {
+			mainPanel.add(new JLabel(new ImageIcon(manager.createImage(tab))));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		mainPanel.add(panel);
 		
 		this.setContentPane(mainPanel);
