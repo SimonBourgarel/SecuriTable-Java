@@ -214,6 +214,18 @@ public class Manager {
 		}
 		return tab;
 	}
+
+	// Method that generates the table with random values.
+	public int[][] generateAnEmptyTable(){
+
+		int[][] tab = new int[9][9];
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				tab[i][j] = 0;
+			}
+		}
+		return tab;
+	}
 	
 	// Method that saves the table into a bufferedImage, image that will be drawn on the screen.
 	public BufferedImage createImage(int[][] tab) throws IOException {
@@ -282,4 +294,73 @@ public class Manager {
 	    
 	    return bufferedImage;
 	}
+	
+	// Method that saves the table into a bufferedImage, image that will be drawn on the screen.
+	public BufferedImage createEmptyImage() throws IOException {
+	    BufferedImage bufferedImage = new BufferedImage(250, 250, BufferedImage.TYPE_INT_RGB);
+	    Graphics2D graphics2d = bufferedImage.createGraphics();
+	    graphics2d.setColor(new Color(153, 153, 204));
+	    graphics2d.fillRect(0, 0, 250, 250);
+
+	    graphics2d.setColor(new Color(204, 255, 255));
+	    graphics2d.fillRect(26, 26, 250, 250);
+
+	    graphics2d.setColor(Color.BLACK);
+	    graphics2d.fillRect(0, 25, 250, 1);
+	    graphics2d.fillRect(0, 50, 250, 1);
+	    graphics2d.fillRect(0, 75, 250, 1);
+	    graphics2d.fillRect(0, 100, 250, 1);
+	    graphics2d.fillRect(0, 125, 250, 1);
+	    graphics2d.fillRect(0, 150, 250, 1);
+	    graphics2d.fillRect(0, 175, 250, 1);
+	    graphics2d.fillRect(0, 200, 250, 1);
+	    graphics2d.fillRect(0, 225, 250, 1);
+
+	    graphics2d.fillRect(25, 0, 1, 250);
+	    graphics2d.fillRect(50, 0, 1, 250);
+	    graphics2d.fillRect(75, 0, 1, 250);
+	    graphics2d.fillRect(100, 0, 1, 250);
+	    graphics2d.fillRect(125, 0, 1, 250);
+	    graphics2d.fillRect(150, 0, 1, 250);
+	    graphics2d.fillRect(175, 0, 1, 250);
+	    graphics2d.fillRect(200, 0, 1, 250);
+	    graphics2d.fillRect(225, 0, 1, 250);
+
+	    graphics2d.drawString("A", 35, 17);
+	    graphics2d.drawString("B", 60, 17);
+	    graphics2d.drawString("C", 85, 17);
+	    graphics2d.drawString("D", 110, 17);
+	    graphics2d.drawString("E", 135, 17);
+	    graphics2d.drawString("F", 160, 17);
+	    graphics2d.drawString("G", 185, 17);
+	    graphics2d.drawString("H", 210, 17);
+	    graphics2d.drawString("I", 235, 17);
+
+	    graphics2d.setColor(new Color(153, 204, 204 ));
+	    for(int i = 0 ; i < 9 ; i++){
+	    	for(int j = 0 ; j < 9 ; j++){
+	    		if(((i % 2 == 0) && (j % 2 == 0)) || ((i % 2 == 1) && (j % 2 == 1))){
+	    			graphics2d.fillRect(((i+1)*25)+1, ((j+1)*25)+1, 24, 24);
+	    		}
+	    	}
+	    }
+
+    	graphics2d.setColor(Color.BLACK);
+	    for(int i = 0 ; i < 9 ; i ++){
+	    	graphics2d.drawString(String.valueOf(i+1), 10, (i + 1) * 25 + 17);
+	    	graphics2d.drawString(String.valueOf(""), 35, (i + 1) * 25 + 17);
+	    	graphics2d.drawString(String.valueOf(""), 60, (i + 1) * 25 + 17);
+	    	graphics2d.drawString(String.valueOf(""), 85, (i + 1) * 25 + 17);
+	    	graphics2d.drawString(String.valueOf(""), 110, (i + 1) * 25 + 17);
+	    	graphics2d.drawString(String.valueOf(""), 135, (i + 1) * 25 + 17);
+	    	graphics2d.drawString(String.valueOf(""), 160, (i + 1) * 25 + 17);
+	    	graphics2d.drawString(String.valueOf(""), 185, (i + 1) * 25 + 17);
+	    	graphics2d.drawString(String.valueOf(""), 210, (i + 1) * 25 + 17);
+	    	graphics2d.drawString(String.valueOf(""), 235, (i + 1) * 25 + 17);
+	    }
+	    graphics2d.dispose();
+	    
+	    return bufferedImage;
+	}
+
 }

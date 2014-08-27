@@ -39,7 +39,6 @@ import com.simon_bourgarel.securitable_java.model.Password;
 public class S3NCCellsWindow extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
-	int[][] tab;
 	JPanel mainPanel;
 
 	JButton jButtonSubmit;
@@ -65,7 +64,6 @@ public class S3NCCellsWindow extends JFrame{
 		this.setLocationRelativeTo(null);
 
 		Manager manager = new Manager();
-		tab = manager.tableGeneration();
 		
 		jcomboBoxFA = new JComboBox();
 		jcomboBoxFO = new JComboBox();
@@ -147,7 +145,7 @@ public class S3NCCellsWindow extends JFrame{
 		
 		// Draw the table (an image) into the screen
 		try {
-			mainPanel.add(new JLabel(new ImageIcon(manager.createImage(tab))));
+			mainPanel.add(new JLabel(new ImageIcon(manager.createEmptyImage())));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -202,7 +200,7 @@ public class S3NCCellsWindow extends JFrame{
 	
 	class ButtonRulesListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			JOptionPane.showMessageDialog(null, "The password will be the content of the cells choosen according to the order.\nFor example if you choose as first cell A1, A9 and finally I9, the password will be (with this randomly generated table): " + tab[0][0] + tab[8][0] + tab[8][8] + ".\nNote: the cells have to be different from each others.");
+			JOptionPane.showMessageDialog(null, "The password will be the content of the cells choosen according to the order.\nNote: the cells have to be different from each others.");
 		}
 	}
 }

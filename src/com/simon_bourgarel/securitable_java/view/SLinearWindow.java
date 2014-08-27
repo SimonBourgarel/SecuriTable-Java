@@ -39,7 +39,6 @@ import com.simon_bourgarel.securitable_java.model.Password;
 public class SLinearWindow extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
-	int[][] tab;
 	JPanel mainPanel;
 	Manager manager;
 	
@@ -63,7 +62,6 @@ public class SLinearWindow extends JFrame{
 		this.setLocationRelativeTo(null);
 		
 		Manager manager = new Manager();
-		tab = manager.tableGeneration();
 		
 		jcomboBoxFA = new JComboBox();
 		jcomboBoxFO = new JComboBox();
@@ -127,7 +125,7 @@ public class SLinearWindow extends JFrame{
 		
 		// Draw the table (an image) into the screen
 		try {
-			mainPanel.add(new JLabel(new ImageIcon(manager.createImage(tab))));
+			mainPanel.add(new JLabel(new ImageIcon(manager.createEmptyImage())));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -192,7 +190,7 @@ public class SLinearWindow extends JFrame{
 	
 	class ButtonRulesListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			JOptionPane.showMessageDialog(null, "The password will be the content of the cells from the first one to the last one choosen.\nFor example if you choose as first cell A1 and as last cell A4, the password will be (with this randomly generated table): " + tab[0][0] + tab[1][0] + tab[2][0] + tab[3][0] + ".\nNote: the password's length should be of 3 or 4 cells.");
+			JOptionPane.showMessageDialog(null, "The password will be the content of the cells from the first one to the last one choosen.\nNote: the password's length should be of 3 or 4 cells.");
 		}
 	}
 }
