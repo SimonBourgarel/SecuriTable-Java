@@ -215,18 +215,6 @@ public class Manager {
 		return tab;
 	}
 
-	// Method that generates the table with random values.
-	public int[][] generateAnEmptyTable(){
-
-		int[][] tab = new int[9][9];
-		for (int i = 0; i < 9; i++) {
-			for (int j = 0; j < 9; j++) {
-				tab[i][j] = 0;
-			}
-		}
-		return tab;
-	}
-	
 	// Method that saves the table into a bufferedImage, image that will be drawn on the screen.
 	public BufferedImage createImage(int[][] tab) throws IOException {
 	    BufferedImage bufferedImage = new BufferedImage(250, 250, BufferedImage.TYPE_INT_RGB);
@@ -295,7 +283,7 @@ public class Manager {
 	    return bufferedImage;
 	}
 	
-	// Method that saves the table into a bufferedImage, image that will be drawn on the screen.
+	// Method that saves an empty table into a bufferedImage, image that will be drawn on the screen.
 	public BufferedImage createEmptyImage() throws IOException {
 	    BufferedImage bufferedImage = new BufferedImage(250, 250, BufferedImage.TYPE_INT_RGB);
 	    Graphics2D graphics2d = bufferedImage.createGraphics();
