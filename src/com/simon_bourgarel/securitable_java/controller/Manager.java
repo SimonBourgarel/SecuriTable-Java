@@ -32,10 +32,12 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.security.SecureRandom;
 
 import com.simon_bourgarel.securitable_java.model.Password;
 
 public class Manager {
+	private static final SecureRandom secureRandom = new SecureRandom();
 
 	/// Method that generates the password from the coordinates and the table.
 	public String generate(int[][] tab, Password password){
@@ -197,7 +199,7 @@ public class Manager {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				do {
-					tab[i][j] = (int) Math.round(Math.random() * 8 + 1);
+					tab[i][j] = (int) Math.round(secureRandom.nextDouble() * 8 + 1);
 					// Algorithm that forbids having two consecutive numbers AND ALSO forbids having generation like 101 or 636
 					if (((i - 1 >= 0) && (tab[i - 1][j] == tab[i][j]))
 							|| ((j - 1 >= 0) && (tab[i][j - 1] == tab[i][j]))/** Comment this lines to allow generation like 101 but still deny generation like 11 or 00. **/
